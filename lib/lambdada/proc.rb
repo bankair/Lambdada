@@ -2,7 +2,7 @@
 
 ##
 # Extend the Proc class to ease composition and curry usage
-class Proc
+module Massala
   ##
   # Compose two lambdas or proc into a third one.
   def +(other)
@@ -19,5 +19,9 @@ class Proc
     result
   end
 
-  alias_method :[], :massala
+  def self.included(klass)
+    klass.send(:alias_method, :[], :massala)
+  end
 end
+
+Proc.include(Massala)
